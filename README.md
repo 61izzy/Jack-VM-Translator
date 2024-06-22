@@ -9,3 +9,7 @@ To run:
 ```
 
 Replace filepath with the path to the intended file, including the .vm extension. For a file <folderpath>/<filename>.vm, outputs the assembley code into a file with the name format <folderpath>/<filename>.asm.
+
+There are a few example Jack VM programs included along with their translated asm programs.
+
+Note: translator is currently not very efficient
