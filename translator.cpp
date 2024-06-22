@@ -6,7 +6,7 @@
 // TODO: make optimizations (if necessary, but probably just keep this project simple for now)
 
 /*
-possible optimizations:
+possible optimizations (can come back to this later after course is done):
 - push same thing twice (or more) in a row then add
 - push twice then binary op or comp
 - push then unary op
