@@ -3,6 +3,7 @@
 
 void CodeWriter::writePointer(CommandType command, std::string segment, int index) {
     if (segmentTable.find(segment) != segmentTable.end()) {
+        // one of the four variable length memory segments
         output << "@" << index << "\n";
         output << "D=A\n";
         output << "@" << segmentTable[segment] << "\n";
@@ -11,7 +12,7 @@ void CodeWriter::writePointer(CommandType command, std::string segment, int inde
         else if (command == C_POP) output << "D=D+M\n";
     }
     else if (segment.compare("pointer") == 0) {
-        // pointer segment is basically THAT if index == 1, THIS if index == 0
+        // pointer segment is basically THIS if index == 0, THAT if index == 1
         output << "@" << (index ? "THAT" : "THIS") << "\n";
         if (command == C_POP) output << "D=A\n";
     }
@@ -21,13 +22,9 @@ void CodeWriter::writePointer(CommandType command, std::string segment, int inde
         if (command == C_POP) output << "D=A\n";
     }
     else if (segment.compare("static") == 0) {
+        // filename is really only used for the static memory segment
         // @<filename>.<index>
         output << "@" << filename << "." << index << "\n";
-        if (command == C_POP) output << "D=A\n";
-    }
-    else {
-        // registers 13-15 that we will use for arithmetic
-        output << "@R" << index << "\n";
         if (command == C_POP) output << "D=A\n";
     }
 }
@@ -37,6 +34,7 @@ void CodeWriter::writeArithmetic(std::string command) {
     output << "// debug: " << command << "\n"; // for debugging purposes
 
     // optimizing all operations by not actually popping anything from the stack
+    // still have to remember to decrement stack pointer for binary operations and comparisons
     if (unaryOpTable.find(command) != unaryOpTable.end()) {
         output << "@SP\n";
         output << "A=M-1\n"; // not having to push and pop saves a lot of lines
@@ -88,14 +86,6 @@ void CodeWriter::writePushPop(CommandType command, std::string segment, int inde
         output << "M=D\n";
     }
     else {
-        // TODO: fix this part because we need to somehow store D if writePointer changes it
-
-        // output << "@SP\n";
-        // output << "AM=M-1\n";
-        // output << "D=M\n";
-        // writePointer(segment, index);
-        // output << "M=D\n";
-        
         writePointer(command, segment, index);
         output << "@R15\n"; // using R15 to temporarily store location to pop to
         output << "M=D\n";

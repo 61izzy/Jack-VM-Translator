@@ -71,8 +71,7 @@ M=D
 AM=M-1
 D=M
 A=A-1
-M=D-M
-M=-M
+M=M-D
 // debug: push static 8
 @StaticTest.8
 D=M

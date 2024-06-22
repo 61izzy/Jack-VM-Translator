@@ -177,8 +177,7 @@ M=D
 AM=M-1
 D=M
 A=A-1
-M=D-M
-M=-M
+M=M-D
 // debug: push this 6
 @6
 D=A
@@ -210,8 +209,7 @@ M=D+M
 AM=M-1
 D=M
 A=A-1
-M=D-M
-M=-M
+M=M-D
 // debug: push temp 6
 @11
 D=M
