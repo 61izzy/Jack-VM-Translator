@@ -12,4 +12,4 @@ Replace filepath with the path to the intended file, including the .vm extension
 
 There are a few example Jack VM programs included along with their translated asm programs.
 
-Note: translator is currently not very efficient
+Note: Translator is not the most efficient. Also currently only works for push, pop, and arithmetic commands.
