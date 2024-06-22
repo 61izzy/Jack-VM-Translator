@@ -45,8 +45,7 @@ M=D
 @2
 D=A
 @THIS
-A=D+M
-D=A
+D=D+M
 @R15
 M=D
 @SP
@@ -66,8 +65,7 @@ M=D
 @6
 D=A
 @THAT
-A=D+M
-D=A
+D=D+M
 @R15
 M=D
 @SP
@@ -91,38 +89,11 @@ M=M+1
 A=M-1
 M=D
 // debug: add
-// debug: pop R 13
-@R13
-D=A
-@R15
-M=D
 @SP
 AM=M-1
 D=M
-@R15
-A=M
-M=D
-// debug: pop R 14
-@R14
-D=A
-@R15
-M=D
-@SP
-AM=M-1
-D=M
-@R15
-A=M
-M=D
-D=M
-@R13
+A=A-1
 M=D+M
-// debug: push R 13
-@R13
-D=M
-@SP
-M=M+1
-A=M-1
-M=D
 // debug: push this 2
 @2
 D=A
@@ -134,38 +105,12 @@ M=M+1
 A=M-1
 M=D
 // debug: sub
-// debug: pop R 13
-@R13
-D=A
-@R15
-M=D
 @SP
 AM=M-1
 D=M
-@R15
-A=M
-M=D
-// debug: pop R 14
-@R14
-D=A
-@R15
-M=D
-@SP
-AM=M-1
-D=M
-@R15
-A=M
-M=D
-D=M
-@R13
+A=A-1
 M=D-M
-// debug: push R 13
-@R13
-D=M
-@SP
-M=M+1
-A=M-1
-M=D
+M=-M
 // debug: push that 6
 @6
 D=A
@@ -177,35 +122,8 @@ M=M+1
 A=M-1
 M=D
 // debug: add
-// debug: pop R 13
-@R13
-D=A
-@R15
-M=D
 @SP
 AM=M-1
 D=M
-@R15
-A=M
-M=D
-// debug: pop R 14
-@R14
-D=A
-@R15
-M=D
-@SP
-AM=M-1
-D=M
-@R15
-A=M
-M=D
-D=M
-@R13
+A=A-1
 M=D+M
-// debug: push R 13
-@R13
-D=M
-@SP
-M=M+1
-A=M-1
-M=D

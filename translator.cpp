@@ -2,6 +2,8 @@
 #include "parser.hpp"
 #include "codewriter.hpp"
 
+// TODO: check that all output files are correct
+
 int main(int argc, char *argv[]) {
     // preprocessing file name and folder
     std::string filepath = argv[1];

@@ -25,11 +25,11 @@ private:
         {"or", "|"}
     };
     std::unordered_map<std::string, std::string> binaryCompTable{
-        {"eq", "JNE"},
-        {"gt", "JLE"},
-        {"lt", "JGE"}
+        {"eq", "JEQ"},
+        {"gt", "JGT"},
+        {"lt", "JLT"}
     };
-    void writePointer(std::string segment, int index);
+    void writePointer(CommandType command, std::string segment, int index);
 
 public:
     CodeWriter(std::ofstream &output, std::string filename) : output{output}, filename{filename} {}
