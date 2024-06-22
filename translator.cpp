@@ -3,6 +3,14 @@
 #include "codewriter.hpp"
 
 // TODO: check that all output files are correct
+// TODO: make optimizations (if necessary, but probably just keep this project simple for now)
+
+/*
+possible optimizations:
+- push same thing twice (or more) in a row then add
+- push twice then binary op or comp
+- push then unary op
+*/
 
 int main(int argc, char *argv[]) {
     // preprocessing file name and folder

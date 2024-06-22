@@ -4,8 +4,12 @@
 void CodeWriter::writePointer(CommandType command, std::string segment, int index) {
     if (segmentTable.find(segment) != segmentTable.end()) {
         // one of the four variable length memory segments
-        output << "@" << index << "\n";
-        output << "D=A\n";
+        // slight optimization, could save a line per command
+        if (index < 2) output << "D=" << index << "\n";
+        else {
+            output << "@" << index << "\n";
+            output << "D=A\n";
+        }
         output << "@" << segmentTable[segment] << "\n";
         // slight optimization
         if (command == C_PUSH) output << "A=D+M\n";
@@ -73,8 +77,12 @@ void CodeWriter::writePushPop(CommandType command, std::string segment, int inde
     if (command == C_PUSH) {
         // constant is special because we only use A as a data register
         if (segment.compare("constant") == 0) { // only possible for push commands
-            output << "@" << index << "\n";
-            output << "D=A\n";
+            // saves 1 line per command for index < 2
+            if (index < 2) output << "D=" << index << "\n";
+            else {
+                output << "@" << index << "\n";
+                output << "D=A\n";
+            }
         }
         else {
             writePointer(command, segment, index);

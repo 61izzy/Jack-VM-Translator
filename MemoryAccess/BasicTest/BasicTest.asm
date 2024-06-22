@@ -6,8 +6,7 @@ M=M+1
 A=M-1
 M=D
 // debug: pop local 0
-@0
-D=A
+D=0
 @LCL
 D=D+M
 @R15
@@ -46,8 +45,7 @@ D=M
 A=M
 M=D
 // debug: pop argument 1
-@1
-D=A
+D=1
 @ARG
 D=D+M
 @R15
@@ -137,8 +135,7 @@ D=M
 A=M
 M=D
 // debug: push local 0
-@0
-D=A
+D=0
 @LCL
 A=D+M
 D=M
@@ -163,8 +160,7 @@ D=M
 A=A-1
 M=D+M
 // debug: push argument 1
-@1
-D=A
+D=1
 @ARG
 A=D+M
 D=M
