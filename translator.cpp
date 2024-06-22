@@ -2,9 +2,6 @@
 #include "parser.hpp"
 #include "codewriter.hpp"
 
-// TODO: change includes later
-// TODO: probably edit utils.hpp to not include unnecessary stuff
-
 int main(int argc, char *argv[]) {
     // preprocessing file name and folder
     std::string filepath = argv[1];

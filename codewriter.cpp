@@ -1,7 +1,3 @@
-// TODO: writeArithmetic (takes command as string and writes the assembly code)
-// TODO: writePushPOP (takes command C_PUSH or C_POP, segment as string, and index as int)
-// TODO: initialize segment table
-
 #include "codewriter.hpp"
 #include "utils.hpp"
 

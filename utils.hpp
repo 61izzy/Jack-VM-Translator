@@ -1,7 +1,9 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
-#include<bits/stdc++.h>
+#include<string>
+#include<unordered_map>
+#include<fstream>
 
 enum CommandType {
     C_ARITHMETIC,
