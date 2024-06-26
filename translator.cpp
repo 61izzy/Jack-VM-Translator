@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
         CodeWriter writer(output);
         writer.writeInit();
 
-        // iterating through all files in the directory
+        // iterating through all files in the directory, skipping folders and files without the .vm extension
         for (auto& entry : std::filesystem::directory_iterator(path)) {
             std::string filename = entry.path().filename().string();
             if (!entry.is_regular_file() || filename.substr(filename.rfind('.')).compare(".vm")) continue;
