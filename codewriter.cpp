@@ -2,6 +2,9 @@
 #include "utils.hpp"
 
 void CodeWriter::setFileName(std::string fileName) {
+
+    output << "// debug: start of file " << fileName << "\n"; // for debugging purposes
+
     filename = fileName;
     std::cout << "Translation of file " << filename << ".vm has started\n";
 }
@@ -14,8 +17,6 @@ void CodeWriter::writeInit() {
     output << "M=D\n";
     // call Sys.init
     writeCall("Sys.init", 0);
-    // output << "@Sys.init\n";
-    // output << "0;JMP\n";
 }
 
 void CodeWriter::writePointer(CommandType command, std::string segment, int index) {
