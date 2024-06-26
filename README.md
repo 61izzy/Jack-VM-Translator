@@ -4,6 +4,8 @@ A translator written in C++ that translates Jack Virtual-Machine code into Hack 
 
 To run:
 
+For a single file:
+
 ```
 ./translator <filepath>
 ```
