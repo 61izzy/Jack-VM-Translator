@@ -5,9 +5,9 @@
 
 class CodeWriter {
 private:
-    int compCount = 0;
+    int compCount = 0, currCallCount = 0;
     std::ofstream &output;
-    std::string filename;
+    std::string filename, currFunc = "";
     std::unordered_map<std::string, std::string> segmentTable{
         {"local", "LCL"},
         {"argument", "ARG"},
@@ -33,8 +33,16 @@ private:
 
 public:
     CodeWriter(std::ofstream &output, std::string filename) : output{output}, filename{filename} {}
+    void setFileName(std::string fileName);
+    void writeInit();
     void writeArithmetic(std::string command);
     void writePushPop(CommandType command, std::string segment, int index);
+    void writeLabel(std::string label);
+    void writeGoto(std::string label);
+    void writeIf(std::string label);
+    void writeFunction(std::string functionName, int numVars);
+    void writeCall(std::string functionName, int numArgs);
+    void writeReturn();
     void close() {
         output.close();
     }

@@ -4,6 +4,8 @@
 #include<string>
 #include<unordered_map>
 #include<fstream>
+#include<iostream>
+#include<filesystem>
 
 enum CommandType {
     C_ARITHMETIC,
