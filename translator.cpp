@@ -52,11 +52,11 @@ int main(int argc, char *argv[]) {
     }
     else {
         // processing folder name and path string
-        std::string foldername = path.filename().string();
         std::string pathstring = path.string();
         // remove trailing slashes
         if (pathstring[pathstring.length() - 1] == '/' || pathstring[pathstring.length() - 1] == '\\') 
             pathstring = pathstring.substr(0, pathstring.length() - 1);
+        std::string foldername = pathstring.substr(pathstring.rfind('/') + 1);
 
         // opening output file
         std::ofstream output(pathstring + "/" + foldername + ".asm");
