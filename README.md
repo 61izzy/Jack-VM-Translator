@@ -22,4 +22,4 @@ All `.vm` files in the directory will be combined and translated into a single f
 
 There are a few example Jack VM programs included along with their translated asm programs.
 
-Note: Translator is not the most efficient. Also currently only works for push, pop, and arithmetic commands.
+Note: Translator is not the most efficient.
