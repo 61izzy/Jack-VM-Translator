@@ -12,7 +12,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: eq
+// debug: arithmetic eq
 @SP
 AM=M-1
 D=M
@@ -39,7 +39,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: eq
+// debug: arithmetic eq
 @SP
 AM=M-1
 D=M
@@ -66,7 +66,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: eq
+// debug: arithmetic eq
 @SP
 AM=M-1
 D=M
@@ -93,7 +93,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: lt
+// debug: arithmetic lt
 @SP
 AM=M-1
 D=M
@@ -120,7 +120,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: lt
+// debug: arithmetic lt
 @SP
 AM=M-1
 D=M
@@ -147,7 +147,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: lt
+// debug: arithmetic lt
 @SP
 AM=M-1
 D=M
@@ -174,7 +174,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: gt
+// debug: arithmetic gt
 @SP
 AM=M-1
 D=M
@@ -201,7 +201,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: gt
+// debug: arithmetic gt
 @SP
 AM=M-1
 D=M
@@ -228,7 +228,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: gt
+// debug: arithmetic gt
 @SP
 AM=M-1
 D=M
@@ -262,7 +262,7 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: add
+// debug: arithmetic add
 @SP
 AM=M-1
 D=M
@@ -275,17 +275,17 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: sub
+// debug: arithmetic sub
 @SP
 AM=M-1
 D=M
 A=A-1
 M=M-D
-// debug: neg
+// debug: arithmetic neg
 @SP
 A=M-1
 M=-M
-// debug: and
+// debug: arithmetic and
 @SP
 AM=M-1
 D=M
@@ -298,13 +298,13 @@ D=A
 M=M+1
 A=M-1
 M=D
-// debug: or
+// debug: arithmetic or
 @SP
 AM=M-1
 D=M
 A=A-1
 M=D|M
-// debug: not
+// debug: arithmetic not
 @SP
 A=M-1
 M=!M

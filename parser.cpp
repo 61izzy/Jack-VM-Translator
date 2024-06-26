@@ -8,10 +8,10 @@ bool Parser::hasMoreCommands() {
     if (currLine.find("//") != -1ULL) currLine = currLine.substr(0, currLine.find("//"));
     // removing extra whitespace
     int idx = currLine.length(); // rtrim
-    while (idx && currLine[idx - 1] == ' ') --idx;
+    while (idx && std::isspace(currLine[idx - 1])) --idx;
     currLine = currLine.substr(0, idx);
-    int idx = 0; // ltrim
-    while (idx < currLine.length() && currLine[idx] == ' ') ++idx;
+    idx = 0; // ltrim
+    while (idx < currLine.length() && std::isspace(currLine[idx])) ++idx;
     currLine = currLine.substr(idx, currLine.length() - idx);
     return true;
 }

@@ -13,9 +13,9 @@ void CodeWriter::writeInit() {
     output << "@SP\n";
     output << "M=D\n";
     // call Sys.init
-    // writeCall("Sys.init", 0);
-    output << "@Sys.init\n";
-    output << "0;JMP\n";
+    writeCall("Sys.init", 0);
+    // output << "@Sys.init\n";
+    // output << "0;JMP\n";
 }
 
 void CodeWriter::writePointer(CommandType command, std::string segment, int index) {
@@ -141,12 +141,12 @@ void CodeWriter::writeIf(std::string label) {
 
     output << "// debug: if-goto " << label << "\n"; // for debugging purposes
 
-    // according to specifications, -1 is true and 0 is false
+    // according to specifications, 0 is false
     output << "@SP\n";
     output << "AM=M-1\n";
     output << "D=M\n";
     output << "@" << currFunc << "$" << label << "\n";
-    output << "D;JLT\n";
+    output << "D;JNE\n";
 }
 
 void CodeWriter::writeFunction(std::string functionName, int numVars) {
@@ -157,12 +157,12 @@ void CodeWriter::writeFunction(std::string functionName, int numVars) {
     currFunc = functionName;
     currCallCount = 0;
     output << "(" << functionName << ")\n";
-    if (!numVars) return; // don't write unnecessary instructions
     // set LCL to SP
     output << "@SP\n";
     output << "D=M\n";
     output << "@LCL\n";
     output << "AM=D\n";
+    if (!numVars) return; // don't write unnecessary instructions
     // sets RAM[LCL] ... RAM[LCL + numVars - 1] (local segment) to 0
     for (int i = 0; i < numVars; i++) {
         output << "M=0\n";
@@ -204,7 +204,7 @@ void CodeWriter::writeCall(std::string functionName, int numArgs) {
     output << "@" << functionName << "\n";
     output << "0;JMP\n";
     // write label for return address
-    output << "(" << currFunc << "$ret." << ++currCallCount << ")\n";
+    output << "(" << currFunc << "$ret." << currCallCount << ")\n";
 }
 
 void CodeWriter::writeReturn() {

@@ -5,47 +5,7 @@
 // TODO: check that all output files are correct
 // TODO: make optimizations (if necessary, but probably just keep this project simple for now)
 
-// TODO: make it possible to go through a directory, select files that have a .vm extension, and parse them
-// bruh we actually have to consider if input is a directory or a .vm file
-// output file should either be fileName.asm or directoryName.asm depending on which one it is
-
-/*
-get files from directory:
-
-#include <filesystem>
-
-namespace fs = std::filesystem;
-
-const fs::path pathToShow{ argc >= 2 ? argv[1] : fs::current_path() };
-
-for (const auto& entry : fs::directory_iterator(pathToShow)) {
-    const auto filenameStr = entry.path().filename().string();
-    if (entry.is_directory()) {
-        std::cout << "dir:  " << filenameStr << '\n';
-    }
-    else if (entry.is_regular_file()) {
-        std::cout << "file: " << filenameStr << '\n';
-    }
-    else
-        std::cout << "??    " << filenameStr << '\n';
-}
-*/
-
-int main(int argc, char *argv[]) {
-    // preprocessing file name and folder
-    std::string filepath = argv[1];
-    int filename_start = filepath.rfind("/") + 1, filename_end = filepath.rfind(".");
-    std::string filename = filepath.substr(filename_start, filename_end - filename_start),
-           filefolder = filepath.substr(0, filename_start - 1);
-
-    // opening input and output files
-    std::ifstream input(argv[1]);
-    std::ofstream output(filefolder + "/" + filename + ".asm");
-
-    // initializing parser and codewriter
-    Parser parser(input);
-    CodeWriter writer(output, filename);
-
+void processFile(Parser &parser, CodeWriter &writer) {
     // goes through all commands in file until parser reaches eof
     while (parser.hasMoreCommands()) {
         parser.advance();
@@ -65,8 +25,66 @@ int main(int argc, char *argv[]) {
         else if (type == C_CALL) writer.writeCall(arg1, arg2);
         else if (type == C_RETURN) writer.writeReturn();
     }
+}
+int main(int argc, char *argv[]) {
+    // using std::filesystem to process input file
+    std::filesystem::path path = argv[1];
 
-    writer.close();
+    // if input is a file, we assume that it is a .vm file and process the individual file
+    if (std::filesystem::is_regular_file(path)) {
+        // processing file name and folder
+        std::string filepath = argv[1];
+        int filename_start = filepath.rfind("/") + 1, filename_end = filepath.rfind(".");
+        std::string filename = filepath.substr(filename_start, filename_end - filename_start),
+               filefolder = filepath.substr(0, filename_start - 1);
+
+        // opening input and output files
+        std::ifstream input(argv[1]);
+        std::ofstream output(filefolder + "/" + filename + ".asm");
+
+        // initializing parser and codewriter
+        Parser parser(input);
+        CodeWriter writer(output, filename);
+
+        processFile(parser, writer);
+
+        writer.close();
+    }
+    else {
+        // processing folder name and path string
+        std::string foldername = path.filename().string();
+        std::string pathstring = path.string();
+        // remove trailing slashes
+        if (pathstring[pathstring.length() - 1] == '/' || pathstring[pathstring.length() - 1] == '\\') 
+            pathstring = pathstring.substr(0, pathstring.length() - 1);
+
+        // opening output file
+        std::ofstream output(pathstring + "/" + foldername + ".asm");
+
+        // initializing codewriter
+        CodeWriter writer(output);
+        writer.writeInit();
+
+        // iterating through all files in the directory
+        for (auto& entry : std::filesystem::directory_iterator(path)) {
+            std::string filename = entry.path().filename().string();
+            if (!entry.is_regular_file() || filename.substr(filename.rfind('.')).compare(".vm")) continue;
+
+            // opening input file
+            std::ifstream input(pathstring + "/" + filename);
+
+            // initializing parser for current file
+            Parser parser(input);
+
+            // setting filename for writer
+            writer.setFileName(filename.substr(0, filename.rfind('.')));
+
+            processFile(parser, writer);
+        }
+
+        writer.close();
+    }
+
     return 0;
 }
 

@@ -66,7 +66,7 @@ D=M
 M=M+1
 A=M-1
 M=D
-// debug: sub
+// debug: arithmetic sub
 @SP
 AM=M-1
 D=M
@@ -79,7 +79,7 @@ D=M
 M=M+1
 A=M-1
 M=D
-// debug: add
+// debug: arithmetic add
 @SP
 AM=M-1
 D=M
