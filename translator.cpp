@@ -97,5 +97,5 @@ possible optimizations (can come back to this later after course is done):
 - pushes that get popped without being modified (especially if it's to the same location)
 - if-goto could be optimized: if previous comparison was false, no need for (@SP, A=M-1)
 
-*note: most of these optimizations will require some precomputation
+*note: most of these optimizations will require some precomputation and need to actually evaluate the code
 */
