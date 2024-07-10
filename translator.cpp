@@ -2,7 +2,6 @@
 #include "parser.hpp"
 #include "codewriter.hpp"
 
-// TODO: check that all output files are correct
 // TODO: make optimizations (if necessary, but probably just keep this project simple for now)
 
 void processFile(Parser &parser, CodeWriter &writer) {
