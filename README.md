@@ -21,3 +21,5 @@ For a directory:
 All `.vm` files in the directory will be combined and translated into a single file with the name format `<folderpath>/<folderpath>.asm`.
 
 There are a few example Jack VM programs included along with their translated asm programs.
+
+Note: The translator assumes that all Jack Virtual-Machine code is error free.
