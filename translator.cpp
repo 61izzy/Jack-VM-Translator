@@ -53,6 +53,8 @@ int main(int argc, char *argv[]) {
         // processing folder name and path string
         std::string pathstring = path.string();
         // remove trailing slashes
+        if (pathstring.length() > 1 && pathstring[pathstring.length() - 1] == '\\' && pathstring[pathstring.length() - 2] == '\\') 
+            pathstring = pathstring.substr(0, pathstring.length() - 2);
         if (pathstring[pathstring.length() - 1] == '/' || pathstring[pathstring.length() - 1] == '\\') 
             pathstring = pathstring.substr(0, pathstring.length() - 1);
         std::string foldername = pathstring.substr(pathstring.rfind('/') + 1);
